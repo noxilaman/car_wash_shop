@@ -1,3 +1,5 @@
+"use strict";
+exports.__esModule = true;
 var db = require("../models");
 var Member = db.members;
 var Op = db.Sequelize.Op;

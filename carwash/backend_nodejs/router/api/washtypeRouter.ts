@@ -1,3 +1,4 @@
+export {}
 var express = require("express");
 const washtypes = require("../../controllers/wash_type.controller")
 var router = express.Router();

@@ -1,3 +1,5 @@
+"use strict";
+exports.__esModule = true;
 var express = require("express");
 var shops = require("../../controllers/shop.controller");
 var router = express.Router();

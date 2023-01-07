@@ -1,3 +1,4 @@
+export {}
 var express = require("express");
 const prices = require("../../controllers/price.controller")
 var router = express.Router();

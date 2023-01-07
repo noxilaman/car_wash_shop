@@ -1,3 +1,4 @@
+export {}
 const db = require("../models");
 const Member = db.members;
 const Op = db.Sequelize.Op;

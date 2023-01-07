@@ -1,3 +1,4 @@
+export {}
 var express = require("express");
 const carsizes = require("../../controllers/car_size.controller");
 const washtypes = require("../../controllers/wash_type.controller");

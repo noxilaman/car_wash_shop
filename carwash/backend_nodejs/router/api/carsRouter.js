@@ -1,3 +1,5 @@
+"use strict";
+exports.__esModule = true;
 var express = require("express");
 var cars = require("../../controllers/car.controller");
 var router = express.Router();

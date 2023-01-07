@@ -1,3 +1,4 @@
+export {}
 var express = require("express");
 const shops = require("../../controllers/shop.controller");
 var router = express.Router();

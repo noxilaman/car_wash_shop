@@ -1,3 +1,4 @@
+export {}
 var express = require("express");
 const images = require("../../controllers/image.controller")
 
