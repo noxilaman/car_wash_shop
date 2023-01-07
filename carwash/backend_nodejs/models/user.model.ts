@@ -26,4 +26,3 @@ module.exports = (sequelize: any, Sequelize: any) => {
   User.seq = sequelize;
   return User;
 };
-ç

@@ -1,7 +1,8 @@
-const db = require("../models");
-const { QueryTypes } = require("sequelize");
-const Activity = db.activities;
-const Op = db.Sequelize.Op;
+export {}
+const db: any = require("../models");
+const QueryTypes: any = require("sequelize").QueryTypes;
+const Activity: any = db.activities;
+const Op: any = db.Sequelize.Op;
 
 // Create and Save a new Tutorial
 exports.create = async (req: any, res: any) => {
@@ -149,10 +150,7 @@ exports.deleteAll = (req: any, res: any) => {
 
 exports.list = async (req: any, res: any) =>{
    const data = await Activity.seq.query(
-     "SELECT activities.id AS id ,activities.createdAt AS createdate,cars.license_code AS licensecode, cars.city AS licensecity,car_sizes.name AS carsize,wash_types.name AS washtype,activities.price AS price,activities.`status` AS washstatus FROM activities LEFT JOIN cars ON cars.id = activities.car_id LEFT JOIN car_sizes ON car_sizes.id = cars.car_size_id LEFT JOIN wash_types ON wash_types.id = activities.wash_type_id ORDER BY activities.createdAt desc limit 10;",
-     {
-       type: QueryTypes.SELECT,
-     }
+     "SELECT activities.id AS id ,activities.createdAt AS createdate,cars.license_code AS licensecode, cars.city AS licensecity,car_sizes.name AS carsize,wash_types.name AS washtype,activities.price AS price,activities.`status` AS washstatus FROM activities LEFT JOIN cars ON cars.id = activities.car_id LEFT JOIN car_sizes ON car_sizes.id = cars.car_size_id LEFT JOIN wash_types ON wash_types.id = activities.wash_type_id ORDER BY activities.createdAt desc limit 10;"
    );
       if (data) {
         res.send(data);
@@ -166,10 +164,7 @@ exports.list = async (req: any, res: any) =>{
 exports.listByShop = async (req: any, res: any) => {
 
   const data = await Activity.seq.query(
-    "SELECT activities.id AS id ,activities.createdAt AS createdate,cars.license_code AS licensecode, cars.city AS licensecity,car_sizes.name AS carsize,wash_types.name AS washtype,activities.price AS price,activities.`status` AS washstatus FROM activities LEFT JOIN cars ON cars.id = activities.car_id LEFT JOIN car_sizes ON car_sizes.id = cars.car_size_id LEFT JOIN wash_types ON wash_types.id = activities.wash_type_id ORDER BY activities.createdAt desc limit 10;",
-    {
-      type: QueryTypes.SELECT,
-    }
+    "SELECT activities.id AS id ,activities.createdAt AS createdate,cars.license_code AS licensecode, cars.city AS licensecity,car_sizes.name AS carsize,wash_types.name AS washtype,activities.price AS price,activities.`status` AS washstatus FROM activities LEFT JOIN cars ON cars.id = activities.car_id LEFT JOIN car_sizes ON car_sizes.id = cars.car_size_id LEFT JOIN wash_types ON wash_types.id = activities.wash_type_id ORDER BY activities.createdAt desc limit 10;"
   );
   if (data) {
     res.send(data);

@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -34,12 +35,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var _this = this;
+exports.__esModule = true;
 var db = require("../models");
 var Group = db.groups;
 var Op = db.Sequelize.Op;
 // Create and Save a new Tutorial
-exports.create = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+exports.create = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var condition, chk, group;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -182,7 +183,7 @@ exports.deleteAll = function (req, res) {
         });
     });
 };
-exports.fncreate = function (name, desc) { return __awaiter(_this, void 0, void 0, function () {
+exports.fncreate = function (name, desc) { return __awaiter(void 0, void 0, void 0, function () {
     var condition, chk, washType, result;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -222,7 +223,7 @@ exports.fncreate = function (name, desc) { return __awaiter(_this, void 0, void 
         }
     });
 }); };
-exports.findByName = function (name) { return __awaiter(_this, void 0, void 0, function () {
+exports.findByName = function (name) { return __awaiter(void 0, void 0, void 0, function () {
     var result;
     return __generator(this, function (_a) {
         switch (_a.label) {

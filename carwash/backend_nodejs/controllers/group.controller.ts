@@ -1,3 +1,4 @@
+export {}
 const db = require("../models");
 const Group = db.groups;
 const Op = db.Sequelize.Op;

@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -13,7 +14,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -34,24 +35,18 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var _this = this;
+exports.__esModule = true;
 var db = require("../models");
 var QueryTypes = require("sequelize").QueryTypes;
 var Price = db.prices;
 var Op = db.Sequelize.Op;
 // Create and Save a new Tutorial
-exports.create = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+exports.create = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var condition, result, price;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 // Validate request
-                if (!req.body.shop_id) {
-                    res.status(400).send({
-                        message: "shop can not be empty!"
-                    });
-                    return [2 /*return*/];
-                }
                 if (!req.body.wash_type_id) {
                     res.status(400).send({
                         message: "wash type can not be empty!"
@@ -71,7 +66,6 @@ exports.create = function (req, res) { return __awaiter(_this, void 0, void 0, f
                     return [2 /*return*/];
                 }
                 condition = {
-                    shop_id: req.body.shop_id,
                     wash_type_id: req.body.wash_type_id,
                     car_size_id: req.body.car_size_id
                 };
@@ -85,7 +79,6 @@ exports.create = function (req, res) { return __awaiter(_this, void 0, void 0, f
                     return [2 /*return*/];
                 }
                 price = {
-                    shop_id: req.body.shop_id,
                     wash_type_id: req.body.wash_type_id,
                     car_size_id: req.body.car_size_id,
                     price: req.body.price
@@ -121,11 +114,9 @@ exports.findAll = function (req, res) {
     });
 };
 exports.getselected = function (req, res) {
-    var shop_id = req.params.shop_id;
     var wash_type_id = req.params.wash_type_id;
     var car_size_id = req.params.car_size_id;
     var condition = {
-        shop_id: shop_id,
         wash_type_id: wash_type_id,
         car_size_id: car_size_id
     };
@@ -217,15 +208,12 @@ exports.deleteAll = function (req, res) {
         });
     });
 };
-exports.fncreate = function (shop_id, wash_type_id, car_size_id, price) { return __awaiter(_this, void 0, void 0, function () {
+exports.fncreate = function (wash_type_id, car_size_id, price) { return __awaiter(void 0, void 0, void 0, function () {
     var priceObj, result;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 // Validate request
-                if (!shop_id) {
-                    return [2 /*return*/];
-                }
                 if (!wash_type_id) {
                     return [2 /*return*/];
                 }
@@ -236,7 +224,6 @@ exports.fncreate = function (shop_id, wash_type_id, car_size_id, price) { return
                     return [2 /*return*/];
                 }
                 priceObj = {
-                    shop_id: shop_id,
                     wash_type_id: wash_type_id,
                     car_size_id: car_size_id,
                     price: price
@@ -255,11 +242,11 @@ exports.fncreate = function (shop_id, wash_type_id, car_size_id, price) { return
         }
     });
 }); };
-exports.list = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+exports.list = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var data;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, Price.seq.query("SELECT prices.id, prices.price, shops.name as shop_name, car_sizes.name as car_size_name , wash_types.name as wash_type_name FROM prices LEFT JOIN car_sizes ON car_sizes.id = prices.car_size_id LEFT JOIN wash_types ON wash_types.id = prices.wash_type_id LEFT JOIN shops ON shops.id = prices.shop_id", {
+            case 0: return [4 /*yield*/, Price.seq.query("SELECT prices.id, prices.price, car_sizes.name as car_size_name , wash_types.name as wash_type_name FROM prices LEFT JOIN car_sizes ON car_sizes.id = prices.car_size_id LEFT JOIN wash_types ON wash_types.id = prices.wash_type_id", {
                     type: QueryTypes.SELECT
                 })];
             case 1:

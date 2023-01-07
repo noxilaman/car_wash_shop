@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -34,7 +35,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var _this = this;
+exports.__esModule = true;
 require("dotenv").config({ path: ".env.".concat(process.env.NODE_ENV) });
 var db = require("../models");
 var User = db.users;
@@ -43,7 +44,7 @@ var QueryTypes = require("sequelize").QueryTypes;
 var bcrypt = require("bcryptjs");
 var jwt = require("jsonwebtoken");
 // Create and Save a new Tutorial
-exports.create = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+exports.create = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var encyptedPassword, user;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -198,7 +199,7 @@ exports.deleteAll = function (req, res) {
         });
     });
 };
-exports.fncreate = function (fname, lname, mobile, email, password) { return __awaiter(_this, void 0, void 0, function () {
+exports.fncreate = function (fname, lname, mobile, email, password) { return __awaiter(void 0, void 0, void 0, function () {
     var encyptedPassword, user, result;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -244,7 +245,7 @@ exports.fncreate = function (fname, lname, mobile, email, password) { return __a
     });
 }); };
 // Update a Tutorial by the id in the request
-exports.gentoken = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+exports.gentoken = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var id, token, myuser, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -267,7 +268,7 @@ exports.gentoken = function (req, res) { return __awaiter(_this, void 0, void 0,
         }
     });
 }); };
-exports.login = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+exports.login = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, email, password, user, resultchk, _b, token, error_2;
     return __generator(this, function (_c) {
         switch (_c.label) {
@@ -301,7 +302,7 @@ exports.login = function (req, res) { return __awaiter(_this, void 0, void 0, fu
                 _c.label = 4;
             case 4:
                 if (!_b) return [3 /*break*/, 6];
-                token = jwt.sign({ id: user.id, email: email }, process.env.JWT_TOKEN_KEY, { expiresIn: "2h" });
+                token = jwt.sign({ id: user.id, email: email, group_id: user.group_id }, process.env.JWT_TOKEN_KEY, { expiresIn: "2h" });
                 user.token = token;
                 return [4 /*yield*/, user.save()];
             case 5:
@@ -315,7 +316,7 @@ exports.login = function (req, res) { return __awaiter(_this, void 0, void 0, fu
         }
     });
 }); };
-exports.list = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+exports.list = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var data;
     return __generator(this, function (_a) {
         switch (_a.label) {

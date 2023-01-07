@@ -1,6 +1,7 @@
-const db = require("../models");
-const CarSize = db.car_sizes;
-const Op = db.Sequelize.Op;
+export {}
+const db: any = require("../models");
+const CarSize: any = db.car_sizes;
+const Op: any = db.Sequelize.Op;
 
 // Create and Save a new Tutorial
 exports.create = async (req: any, res: any) => {

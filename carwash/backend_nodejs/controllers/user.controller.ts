@@ -1,3 +1,4 @@
+export {}
 require("dotenv").config({ path: `.env.${process.env.NODE_ENV}` });
 const db = require("../models");
 const User = db.users;

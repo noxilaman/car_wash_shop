@@ -1,3 +1,4 @@
+export {}
 const db = require("../models");
 const { QueryTypes } = require("sequelize");
 const Price = db.prices;

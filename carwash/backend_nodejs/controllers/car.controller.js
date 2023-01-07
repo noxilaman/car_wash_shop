@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -13,7 +14,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -34,12 +35,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var _this = this;
+exports.__esModule = true;
 var db = require("../models");
 var Car = db.cars;
 var Op = db.Sequelize.Op;
 // Create and Save a new Tutorial
-exports.create = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+exports.create = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var condition, result, car;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -194,7 +195,7 @@ exports.deleteAll = function (req, res) {
         });
     });
 };
-exports.haveCar = function (license_code, city) { return __awaiter(_this, void 0, void 0, function () {
+exports.haveCar = function (license_code, city) { return __awaiter(void 0, void 0, void 0, function () {
     var condition, result;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -217,7 +218,7 @@ exports.haveCar = function (license_code, city) { return __awaiter(_this, void 0
         }
     });
 }); };
-exports.fncreate = function (license_code, city, car_size_id) { return __awaiter(_this, void 0, void 0, function () {
+exports.fncreate = function (license_code, city, car_size_id) { return __awaiter(void 0, void 0, void 0, function () {
     var condition, chk, car, result;
     return __generator(this, function (_a) {
         switch (_a.label) {
