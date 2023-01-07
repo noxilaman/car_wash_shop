@@ -1,3 +1,5 @@
+"use strict";
+exports.__esModule = true;
 var express = require("express");
 var users = require("../../controllers/user.controller");
 var router = express.Router();

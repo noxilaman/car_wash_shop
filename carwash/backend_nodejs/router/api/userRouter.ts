@@ -1,3 +1,4 @@
+export {}
 var express = require("express");
 const users = require("../../controllers/user.controller");
 var router = express.Router();
