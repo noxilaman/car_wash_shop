@@ -47,19 +47,22 @@ exports.create = function (req, res) { return __awaiter(void 0, void 0, void 0, 
             case 0:
                 // Validate request
                 if (!req.body.license_code) {
-                    res.status(400).send({
+                    res.status(400);
+                    res.send({
                         message: "license_code can not be empty!"
                     });
                     return [2 /*return*/];
                 }
                 if (!req.body.city) {
-                    res.status(400).send({
+                    res.status(400);
+                    res.send({
                         message: "city can not be empty!"
                     });
                     return [2 /*return*/];
                 }
                 if (!req.body.car_size_id) {
-                    res.status(400).send({
+                    res.status(400);
+                    res.send({
                         message: "Car size can not be empty!"
                     });
                     return [2 /*return*/];
@@ -73,7 +76,8 @@ exports.create = function (req, res) { return __awaiter(void 0, void 0, void 0, 
             case 1:
                 result = _a.sent();
                 if (result.length > 0) {
-                    res.status(400).send({
+                    res.status(400);
+                    res.send({
                         message: "Already have prices!"
                     });
                     return [2 /*return*/];
@@ -87,9 +91,11 @@ exports.create = function (req, res) { return __awaiter(void 0, void 0, void 0, 
                 // Save Tutorial in the database
                 return [4 /*yield*/, Car.create(car)
                         .then(function (data) {
+                        res.status(200);
                         res.send(data);
                     })["catch"](function (err) {
-                        res.status(500).send({
+                        res.status(500);
+                        res.send({
                             message: err.message || "Some error occurred while creating the Car."
                         });
                     })];
@@ -101,63 +107,144 @@ exports.create = function (req, res) { return __awaiter(void 0, void 0, void 0, 
     });
 }); };
 // Retrieve all Tutorials from the database.
-exports.findAll = function (req, res) {
+exports.findAll = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var license_code, condition;
     var _a;
-    var license_code = req.query.license_code;
-    var condition = license_code
-        ? { license_code: (_a = {}, _a[Op.like] = "%".concat(license_code, "%"), _a) }
-        : null;
-    Car.findAll({ where: condition })
-        .then(function (data) {
-        res.send(data);
-    })["catch"](function (err) {
-        res.status(500).send({
-            message: err.message || "Some error occurred while retrieving cars."
-        });
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                license_code = req.query.license_code;
+                condition = license_code
+                    ? { license_code: (_a = {}, _a[Op.like] = "%".concat(license_code, "%"), _a) }
+                    : null;
+                return [4 /*yield*/, Car.findAll({ where: condition })
+                        .then(function (data) {
+                        res.status(200);
+                        res.send(data);
+                    })["catch"](function (err) {
+                        res.status(500);
+                        res.send({
+                            message: err.message || "Some error occurred while retrieving cars."
+                        });
+                    })];
+            case 1:
+                _b.sent();
+                return [2 /*return*/];
+        }
     });
-};
+}); };
 // Find a single Tutorial with an id
-exports.findOne = function (req, res) {
-    var id = req.params.id;
-    Car.findByPk(id)
-        .then(function (data) {
-        if (data) {
-            res.send(data);
+exports.findOne = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var id;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                id = req.params.id;
+                return [4 /*yield*/, Car.findByPk(id)
+                        .then(function (data) {
+                        if (data) {
+                            res.status(200);
+                            res.send(data);
+                        }
+                        else {
+                            res.status(404);
+                            res.send({
+                                message: "Cannot find Car with id=".concat(id, ".")
+                            });
+                        }
+                    })["catch"](function (err) {
+                        res.status(500);
+                        res.send({
+                            message: err.message || "Error retrieving Car with id=" + id
+                        });
+                    })];
+            case 1:
+                _a.sent();
+                return [2 /*return*/];
         }
-        else {
-            res.status(404).send({
-                message: "Cannot find Car with id=".concat(id, ".")
-            });
-        }
-    })["catch"](function (err) {
-        res.status(500).send({
-            message: err.message || "Error retrieving Car with id=" + id
-        });
     });
-};
+}); };
 // Update a Tutorial by the id in the request
-exports.update = function (req, res) {
-    var id = req.params.id;
-    Car.update(req.body, {
-        where: { id: id }
-    })
-        .then(function (num) {
-        if (num == 1) {
-            res.send({
-                message: "Car was updated successfully."
-            });
+exports.update = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var id, condition, result;
+    var _a;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                if (!req.params.id) {
+                    res.status(400);
+                    res.send({
+                        message: "id can not be empty!"
+                    });
+                    return [2 /*return*/];
+                }
+                id = req.params.id;
+                if (!req.body.license_code) {
+                    res.status(400);
+                    res.send({
+                        message: "license_code can not be empty!"
+                    });
+                    return [2 /*return*/];
+                }
+                return [4 /*yield*/, Car.findByPk(id)
+                        .then(function (data) {
+                        if (data.length == 1) {
+                            res.status(404);
+                            res.send({
+                                message: "Cannot find Car with id=".concat(id, ".")
+                            });
+                        }
+                    })["catch"](function (err) {
+                        res.status(500);
+                        res.send({
+                            message: err.message || "Error retrieving Car with id=" + id
+                        });
+                    })];
+            case 1:
+                _b.sent();
+                condition = (_a = {
+                        license_code: req.body.license_code
+                    },
+                    _a[Op.not] = [{ id: id }],
+                    _a);
+                return [4 /*yield*/, Car.findAll({ where: condition })];
+            case 2:
+                result = _b.sent();
+                if (result) {
+                    res.status(400);
+                    res.send({
+                        message: "Can't update duplicate license_code."
+                    });
+                    return [2 /*return*/];
+                }
+                return [4 /*yield*/, Car.update(req.body, {
+                        where: { id: id }
+                    })
+                        .then(function (num) {
+                        if (num == 1) {
+                            res.status(200);
+                            res.send({
+                                message: "Car was updated successfully."
+                            });
+                        }
+                        else {
+                            res.status(404);
+                            res.send({
+                                message: "Cannot update Car with id=".concat(id, ". Maybe Car was not found or req.body is empty!")
+                            });
+                        }
+                    })["catch"](function (err) {
+                        res.status(500);
+                        res.send({
+                            message: err.message || "Error updating Car with id=" + id
+                        });
+                    })];
+            case 3:
+                _b.sent();
+                return [2 /*return*/];
         }
-        else {
-            res.send({
-                message: "Cannot update Car with id=".concat(id, ". Maybe Car was not found or req.body is empty!")
-            });
-        }
-    })["catch"](function (err) {
-        res.status(500).send({
-            message: err.message || "Error updating Car with id=" + id
-        });
     });
-};
+}); };
 // Delete a Tutorial with the specified id in the request
 exports["delete"] = function (req, res) {
     var id = req.params.id;
@@ -176,25 +263,34 @@ exports["delete"] = function (req, res) {
             });
         }
     })["catch"](function (err) {
-        res.status(500).send({
+        res.status(500);
+        res.send({
             message: err.message || "Could not delete Car with id=" + id
         });
     });
 };
 // Delete all Tutorials from the database.
-exports.deleteAll = function (req, res) {
-    Car.destroy({
-        where: {},
-        truncate: false
-    })
-        .then(function (nums) {
-        res.send({ message: "".concat(nums, " Cars were deleted successfully!") });
-    })["catch"](function (err) {
-        res.status(500).send({
-            message: err.message || "Some error occurred while removing all cars."
-        });
+exports.deleteAll = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, Car.destroy({
+                    where: {},
+                    truncate: false
+                })
+                    .then(function (nums) {
+                    res.send({ message: "".concat(nums, " Cars were deleted successfully!") });
+                })["catch"](function (err) {
+                    res.status(500);
+                    res.send({
+                        message: err.message || "Some error occurred while removing all cars."
+                    });
+                })];
+            case 1:
+                _a.sent();
+                return [2 /*return*/];
+        }
     });
-};
+}); };
 exports.haveCar = function (license_code, city) { return __awaiter(void 0, void 0, void 0, function () {
     var condition, result;
     return __generator(this, function (_a) {

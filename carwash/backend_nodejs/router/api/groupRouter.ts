@@ -1,3 +1,4 @@
+export {}
 var express = require("express");
 const groups = require("../../controllers/group.controller")
 var router = express.Router();

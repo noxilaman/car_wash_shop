@@ -29,6 +29,5 @@ db.wash_types = require("./wash_type.model")(sequelize, Sequelize);
 db.users = require("./user.model")(sequelize, Sequelize);
 db.shops = require("./shop.model")(sequelize, Sequelize);
 db.groups = require("./group.model")(sequelize, Sequelize);
-db.usershops = require("./user_shop.model")(sequelize, Sequelize);
 
 module.exports = db;
