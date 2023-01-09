@@ -10,14 +10,12 @@ function Header() {
   const navigate = useNavigate()
 
   const tokenkey = localStorage.getItem("token");
-  const shop_id = localStorage.getItem("shop_id");
   const userobj = JSON.parse(localStorage.getItem("user"));
 
 
 
   const logoutHandler = ()=> {
     localStorage.setItem("token","");
-    localStorage.setItem("shop_id","");
     navigate("/login");
   }
 
@@ -29,13 +27,11 @@ function Header() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           {tokenkey !== null &&
-            tokenkey.length > 0 &&
-            shop_id !== null &&
-            shop_id.length > 0 && (
+            tokenkey.length > 0 && (
               <Nav className="me-auto">
                 <Nav.Link href="/dashboardpage">Dashboard</Nav.Link>
-                <Nav.Link href={"/washpage/" + shop_id}>ล้างรถ</Nav.Link>
-                <Nav.Link href={"/listpage" + shop_id}>รายการ</Nav.Link>
+                <Nav.Link href={"/washpage" }>ล้างรถ</Nav.Link>
+                <Nav.Link href={"/listpage"}>รายการ</Nav.Link>
                 {userobj.group_id === 1 && (
                   <NavDropdown title="Main Admin" id="basic-nav-dropdown">
                     <NavDropdown.Item href="/admin/group/list">
@@ -59,7 +55,7 @@ function Header() {
                 {userobj.group_id === 2 && (
                   <NavDropdown title="Shop Admin" id="basic-nav-dropdown">
                     <NavDropdown.Item
-                      href={"/admin/user/listbyshop/" + shop_id}
+                      href={"/admin/user/listbyshop"}
                     >
                       พนักงาน
                     </NavDropdown.Item>
@@ -69,7 +65,7 @@ function Header() {
                     <NavDropdown.Item href="/admin/washtype/list">
                       บริการ
                     </NavDropdown.Item>
-                    <NavDropdown.Item href={"/admin/price/listbyshop/" + shop_id}>
+                    <NavDropdown.Item href={"/admin/price/listbyshop"}>
                       ราคาบริการ
                     </NavDropdown.Item>
                   </NavDropdown>
@@ -80,23 +76,11 @@ function Header() {
                 </Nav.Link>
               </Nav>
             )}
-          {(tokenkey === null || tokenkey.length === 0) &&
-            (shop_id === null || shop_id.length === 0) && (
+          {(tokenkey === null || tokenkey.length === 0) &&(
               <Nav className="me-auto">
                 <Nav.Link href="/login">Login</Nav.Link>
               </Nav>
             )}
-          {shop_id === null ||
-            shop_id.length === 0 ||
-            tokenkey !== null ||
-            (tokenkey.length > 0 && (
-              <Nav className="me-auto">
-                <Nav.Link href="/">เลือกร้าน</Nav.Link>
-                <Nav.Link href="#" onClick={logoutHandler}>
-                  Logout
-                </Nav.Link>
-              </Nav>
-            ))}
         </Navbar.Collapse>
       </Container>
     </Navbar>

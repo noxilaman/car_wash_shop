@@ -13,7 +13,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -39,22 +39,33 @@ require("dotenv").config();
 var bcrypt = require("bcryptjs");
 var jwt = require("jsonwebtoken");
 var verifyToken = function (req, res, next) { return __awaiter(_this, void 0, void 0, function () {
-    var token, decode;
+    var token, decode, error_1;
     return __generator(this, function (_a) {
-        token = req.body.token || req.query.token || req.headers['x-access-token'];
-        if (!token) {
-            return [2 /*return*/, res.status(403).send("Empty token")];
+        switch (_a.label) {
+            case 0:
+                token = req.body.token || req.query.token || req.headers['x-access-token'];
+                if (!token) {
+                    res.status(403);
+                    res.send("Empty token");
+                    return [2 /*return*/];
+                }
+                _a.label = 1;
+            case 1:
+                _a.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, jwt.verify(token, process.env.JWT_TOKEN_KEY)];
+            case 2:
+                decode = _a.sent();
+                //console.log(decode);
+                req.user = decode;
+                return [3 /*break*/, 4];
+            case 3:
+                error_1 = _a.sent();
+                console.log(error_1);
+                res.status(404);
+                res.send("Expired Key");
+                return [2 /*return*/];
+            case 4: return [2 /*return*/, next()];
         }
-        try {
-            decode = jwt.verify(token, process.env.JWT_TOKEN_KEY);
-            //console.log(decode);
-            req.user = decode;
-        }
-        catch (error) {
-            console.log(error);
-            return [2 /*return*/, res.status(404).send("Expired Key")];
-        }
-        return [2 /*return*/, next()];
     });
 }); };
 module.exports = verifyToken;

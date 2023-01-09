@@ -11,7 +11,6 @@ import { useNavigate,useParams } from "react-router-dom";
 
 function Washpage() {
   const navigate = useNavigate(); 
-  let { shopid } = useParams();
   const [licensename,setLicensename] = useState('');
   const [city,setCity] = useState('');
   const [sizeId,setSizeId] = useState('');
@@ -23,7 +22,6 @@ function Washpage() {
   const [isSelected, setIsSelected] = useState(false);
 
   const tokenkey = localStorage.getItem("token");
-  const shop_id = shopid ||  localStorage.getItem("shop_id");
 
   const [postResult,setPostResult] = useState(null);
 
@@ -113,7 +111,7 @@ function Washpage() {
       ) {
         const res2 = await axios
           .get(
-            "http://localhost:8086/api/price/getselected/" + shop_id + "/" + wtid + "/" + scid
+            "http://localhost:8086/api/price/getselected/" + wtid + "/" + scid
             , {
               headers: {
                 "x-access-token": tokenkey,
@@ -144,7 +142,6 @@ function Washpage() {
     formData.append('sizeId', sizeId);
     formData.append('washTypeId', washTypeId);
     formData.append('price', price);
-    formData.append("shop_id", shop_id);
     if (selectedFile){
       formData.append("File", selectedFile);
     } 
@@ -161,7 +158,7 @@ function Washpage() {
 
       console.log(res);
       if(res.status == 200){
-        navigate("/listpage/" + shop_id);
+        navigate("/listpage");
       }
 
     } catch (err) {

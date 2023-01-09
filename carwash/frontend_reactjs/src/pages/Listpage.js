@@ -11,7 +11,6 @@ import axios from "axios";
 import { useParams,useNavigate } from "react-router-dom";
 
 function Listpage() {
-  let { shop_id } = useParams();
   const navigate = useNavigate();
   const [WashList, setWashList] = useState([]);
 
@@ -20,7 +19,7 @@ function Listpage() {
       (async () => {
         try {
           const res = await axios
-            .get("http://localhost:8086/api/activities/listByShop/" + shop_id, {
+            .get("http://localhost:8086/api/activities/listByShop", {
               headers: {
                 "x-access-token": tokenkey,
               },
@@ -30,14 +29,12 @@ function Listpage() {
                 setWashList(response.data);
               } else {
                 localStorage.setItem("token", "");
-                localStorage.setItem("shop_id", "");
                 navigate("/login");
               }
             });
         } catch (err) {
           console.log(err);
           localStorage.setItem("token", "");
-          localStorage.setItem("shop_id", "");
           navigate("/login");
         }
       })();
@@ -46,7 +43,7 @@ function Listpage() {
   setInterval(async () => {
     try {
       const res = await axios
-        .get("http://localhost:8086/api/activities/listByShop/" + shop_id, {
+        .get("http://localhost:8086/api/activities/listByShop", {
           headers: {
             "x-access-token": tokenkey,
           },
@@ -56,7 +53,6 @@ function Listpage() {
             setWashList(response.data);
           } else {
             localStorage.setItem("token", "");
-            localStorage.setItem("shop_id", "");
             navigate("/login");
           }
         });

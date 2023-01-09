@@ -6,16 +6,20 @@ const verifyToken = async (req: any,res: any,next: any) => {
     const token = req.body.token || req.query.token || req.headers['x-access-token'];
 
     if(!token){
-        return res.status(403).send("Empty token");
+        res.status(403);
+        res.send("Empty token");
+        return;
     }
 
     try {
-        const decode = jwt.verify(token, process.env.JWT_TOKEN_KEY);
+        const decode = await jwt.verify(token, process.env.JWT_TOKEN_KEY);
          //console.log(decode);
         req.user = decode;
     } catch (error) {
         console.log(error)
-        return res.status(404).send("Expired Key");
+        res.status(404);
+        res.send("Expired Key");
+        return;
     }
 
     return next();

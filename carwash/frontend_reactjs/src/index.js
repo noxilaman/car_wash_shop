@@ -44,9 +44,9 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Mainpage />}></Route>
-        <Route path="/washpage/:shopid" element={<Washpage />}></Route>
+        <Route path="/washpage" element={<Washpage />}></Route>
         <Route path="/dashboardpage" element={<Dashboardpage />}></Route>
-        <Route path="/listpage/:shop_id" element={<Listpage />}></Route>
+        <Route path="/listpage" element={<Listpage />}></Route>
         <Route path="/staff/jobspage" element={<Jobspage />}></Route>
         <Route path="/login" element={<Loginpage />}></Route>
 
