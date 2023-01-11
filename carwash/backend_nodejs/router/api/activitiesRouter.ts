@@ -9,6 +9,6 @@ router.get("/get/:id", activities.getcustom);
 
 router.post("/updatestatus", activities.updateStatus);
 
-router.get("/listByShop/:shop_id", activities.listByShop);
+router.get("/listByShop", activities.listByShop);
 
 module.exports = router;

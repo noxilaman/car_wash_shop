@@ -58,6 +58,9 @@ function Listpage() {
         });
     } catch (err) {
       console.log(err);
+      localStorage.setItem("token", "");
+      localStorage.setItem("user", "");
+      navigate("/login");
     }
   }, 50000);
   return (

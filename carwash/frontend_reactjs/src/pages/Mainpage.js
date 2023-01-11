@@ -34,16 +34,7 @@ function Mainpage() {
             }
           });
 
-        const res = await axios
-          .get("http://localhost:8086/api/shop/", {
-            headers: {
-              "x-access-token": tokenkey,
-            },
-          })
-          .then(function (response) {
-            setShopData(response.data);
-            console.log(response.data);
-          });
+       
 
       } catch (err) {
         console.log(err);

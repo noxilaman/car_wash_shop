@@ -3,7 +3,7 @@ exports.__esModule = true;
 var express = require("express");
 var prices = require("../../controllers/price.controller");
 var router = express.Router();
-router.get("/getselected/:shop_id/:wash_type_id/:car_size_id", prices.getselected);
+router.get("/getselected/:wash_type_id/:car_size_id", prices.getselected);
 router.get("/getall", prices.findAll);
 router.get("/list", prices.list);
 router.post("/", prices.create);

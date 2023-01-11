@@ -4,7 +4,7 @@ const prices = require("../../controllers/price.controller")
 var router = express.Router();
 
 router.get(
-  "/getselected/:shop_id/:wash_type_id/:car_size_id",
+  "/getselected/:wash_type_id/:car_size_id",
   prices.getselected
 );
 
