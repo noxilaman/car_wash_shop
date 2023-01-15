@@ -66,7 +66,6 @@ var router = express.Router();
           const washtype = await washtypes.findByName(opt[0]);
 
           const result = await prices.fncreate(
-            1,
             washtype[0].id,
             carsize[0].id,
             opt[2]

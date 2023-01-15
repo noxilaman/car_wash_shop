@@ -54,8 +54,7 @@ router.post("/create", function (req, res) {
                         File_1.mv(__dirname + "/../../../frontend_reactjs/public/uploads/" + File_1.name);
                     }
                     //validate Empty data
-                    if (!(postData.shop_id &&
-                        postData.licensename &&
+                    if (!(postData.licensename &&
                         postData.city &&
                         postData.sizeId &&
                         postData.washTypeId &&
@@ -78,7 +77,7 @@ router.post("/create", function (req, res) {
                     _a.label = 4;
                 case 4:
                     if (!carid) return [3 /*break*/, 6];
-                    return [4 /*yield*/, activities.fncreate(carid, postData.shop_id, postData.washTypeId, postData.price)];
+                    return [4 /*yield*/, activities.fncreate(carid, postData.washTypeId, postData.price)];
                 case 5:
                     Result = _a.sent();
                     res.status(200).send(Result);

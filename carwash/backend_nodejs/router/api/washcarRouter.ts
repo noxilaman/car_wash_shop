@@ -20,7 +20,6 @@ router.post("/create", async function (req : any, res: any) {
     //validate Empty data
     if (
       !(
-        postData.shop_id &&
         postData.licensename &&
         postData.city &&
         postData.sizeId &&
@@ -51,7 +50,6 @@ router.post("/create", async function (req : any, res: any) {
     if (carid) {
       const Result = await activities.fncreate(
         carid,
-        postData.shop_id,
         postData.washTypeId,
         postData.price
       );

@@ -125,7 +125,7 @@ router.get("/", function (req, res) {
                         return [4 /*yield*/, washtypes.findByName(opt[0])];
                     case 2:
                         washtype = _a.sent();
-                        return [4 /*yield*/, prices.fncreate(1, washtype[0].id, carsize[0].id, opt[2])];
+                        return [4 /*yield*/, prices.fncreate(washtype[0].id, carsize[0].id, opt[2])];
                     case 3:
                         result = _a.sent();
                         return [3 /*break*/, 5];

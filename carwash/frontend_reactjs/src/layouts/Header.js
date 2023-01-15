@@ -10,7 +10,18 @@ function Header() {
   const navigate = useNavigate()
 
   const tokenkey = localStorage.getItem("token");
-  const userobj = JSON.parse(localStorage.getItem("user"));
+  
+  let userobj = [];
+
+  const storedData = localStorage.getItem("user");
+     if (!storedData) {
+      console.log('Local storage is empty');
+    }else{
+      console.log(storedData);
+      userobj = JSON.parse(storedData);
+    }
+
+  
 
 
 

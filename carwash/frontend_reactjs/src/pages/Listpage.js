@@ -27,6 +27,8 @@ function Listpage() {
             .then(function (response) {
               if (response.status === 200) {
                 setWashList(response.data);
+                console.log(response);
+                console.log(WashList);
               } else {
                 localStorage.setItem("token", "");
                 navigate("/login");
@@ -51,6 +53,8 @@ function Listpage() {
         .then(function (response) {
           if (response.status === 200) {
             setWashList(response.data);
+            console.log(response);
+            console.log(WashList);
           } else {
             localStorage.setItem("token", "");
             navigate("/login");
@@ -98,13 +102,13 @@ function Listpage() {
               <tbody>
                 {WashList.map((opt) => (
                   <tr>
-                    <td>{moment(opt.createdate).format("YYYY-MM-DD hh:mm")}</td>
+                    <td>{moment(opt[0].createdate).format("YYYY-MM-DD hh:mm")}</td>
                     <td>
-                      {opt.licensecode} - {opt.licensecity}
+                      {opt[0].licensecode} - {opt[0].licensecity}
                     </td>
-                    <td>{opt.carsize}</td>
-                    <td>{opt.washtype}</td>
-                    <td>{opt.washstatus}</td>
+                    <td>{opt[0].carsize}</td>
+                    <td>{opt[0].washtype}</td>
+                    <td>{opt[0].washstatus}</td>
                   </tr>
                 ))}
               </tbody>
