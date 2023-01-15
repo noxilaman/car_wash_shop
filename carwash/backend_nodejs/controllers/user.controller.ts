@@ -2,6 +2,7 @@ export {}
 require("dotenv").config({ path: `.env.${process.env.NODE_ENV}` });
 const db = require("../models");
 const User = db.users;
+const Group = db.groups;
 const Op = db.Sequelize.Op;
 const { QueryTypes } = require("sequelize");
 const bcrypt = require("bcryptjs");
@@ -255,14 +256,18 @@ exports.login = async (req: any, res: any) => {
 
     if (user && (await bcrypt.compare(password, user.password))) {
 
+      const group = await Group.findOne({ where: { id: user.group_id } });
+
       const token = jwt.sign(
-        { id: user.id, email, group_id: user.group_id },
+        { id: user.id, email, group_id: user.group_id, groupname: user.name },
         process.env.JWT_TOKEN_KEY,
         { expiresIn: "2h" }
       );
 
       user.token = token;
+      console.log(user);
       await user.save();
+      
       return res.status(200).json(user);
     }
 

@@ -55,11 +55,28 @@ function Loginpage() {
 
       console.log(res.status);
       if (res.status === 200) {
-        //console.log(res.data);
+        console.log(res.data);
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("user", JSON.stringify(res.data));
-        console.log(res.data);
-        navigate("/");
+
+        const res2 = await axios
+          .get("http://localhost:8086/api/group/" + res.data.group_id, {
+            headers: {
+              "x-access-token": res.data.token,
+            },
+          })
+          .then(function (response) {
+            console.log(response.data.name);
+              localStorage.setItem("groupname", response.data.name);
+              if(response.data.name == 'Washman'){
+                navigate("/staff/jobspage");
+              }else{
+                navigate("/");
+              }
+          });
+
+        
+        
       }else{
         localStorage.setItem("token", "");
         localStorage.setItem("user", "");

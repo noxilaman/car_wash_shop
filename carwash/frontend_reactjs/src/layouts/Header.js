@@ -10,6 +10,7 @@ function Header() {
   const navigate = useNavigate()
 
   const tokenkey = localStorage.getItem("token");
+  const groupname = localStorage.getItem("groupname");
   
   let userobj = [];
 
@@ -63,7 +64,7 @@ function Header() {
                   </NavDropdown>
                 )}
 
-                {userobj.group_id === 2 && (
+                {groupname === 'Washman' && (
                   <NavDropdown title="Shop Admin" id="basic-nav-dropdown">
                     <NavDropdown.Item
                       href={"/admin/user/listbyshop"}

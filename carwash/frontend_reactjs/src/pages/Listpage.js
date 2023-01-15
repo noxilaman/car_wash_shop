@@ -27,8 +27,6 @@ function Listpage() {
             .then(function (response) {
               if (response.status === 200) {
                 setWashList(response.data);
-                console.log(response);
-                console.log(WashList);
               } else {
                 localStorage.setItem("token", "");
                 navigate("/login");
@@ -53,8 +51,6 @@ function Listpage() {
         .then(function (response) {
           if (response.status === 200) {
             setWashList(response.data);
-            console.log(response);
-            console.log(WashList);
           } else {
             localStorage.setItem("token", "");
             navigate("/login");
@@ -66,7 +62,7 @@ function Listpage() {
       localStorage.setItem("user", "");
       navigate("/login");
     }
-  }, 50000);
+  }, 100000);
   return (
     <div>
       <Header />

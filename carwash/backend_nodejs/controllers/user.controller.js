@@ -39,6 +39,7 @@ exports.__esModule = true;
 require("dotenv").config({ path: ".env.".concat(process.env.NODE_ENV) });
 var db = require("../models");
 var User = db.users;
+var Group = db.groups;
 var Op = db.Sequelize.Op;
 var QueryTypes = require("sequelize").QueryTypes;
 var bcrypt = require("bcryptjs");
@@ -269,11 +270,11 @@ exports.gentoken = function (req, res) { return __awaiter(void 0, void 0, void 0
     });
 }); };
 exports.login = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, email, password, user, resultchk, _b, token, error_2;
+    var _a, email, password, user, resultchk, _b, group, token, error_2;
     return __generator(this, function (_c) {
         switch (_c.label) {
             case 0:
-                _c.trys.push([0, 7, , 8]);
+                _c.trys.push([0, 8, , 9]);
                 _a = req.body, email = _a.email, password = _a.password;
                 // Validate request
                 if (!email) {
@@ -301,18 +302,22 @@ exports.login = function (req, res) { return __awaiter(void 0, void 0, void 0, f
                 _b = (_c.sent());
                 _c.label = 4;
             case 4:
-                if (!_b) return [3 /*break*/, 6];
-                token = jwt.sign({ id: user.id, email: email, group_id: user.group_id }, process.env.JWT_TOKEN_KEY, { expiresIn: "2h" });
-                user.token = token;
-                return [4 /*yield*/, user.save()];
+                if (!_b) return [3 /*break*/, 7];
+                return [4 /*yield*/, Group.findOne({ where: { id: user.group_id } })];
             case 5:
+                group = _c.sent();
+                token = jwt.sign({ id: user.id, email: email, group_id: user.group_id, groupname: user.name }, process.env.JWT_TOKEN_KEY, { expiresIn: "2h" });
+                user.token = token;
+                console.log(user);
+                return [4 /*yield*/, user.save()];
+            case 6:
                 _c.sent();
                 return [2 /*return*/, res.status(200).json(user)];
-            case 6: return [2 /*return*/, res.status(401).send({ message: "Login Fail" })];
-            case 7:
+            case 7: return [2 /*return*/, res.status(401).send({ message: "Login Fail" })];
+            case 8:
                 error_2 = _c.sent();
                 return [2 /*return*/, res.status(401).send({ message: "Error", obj: error_2 })];
-            case 8: return [2 /*return*/];
+            case 9: return [2 /*return*/];
         }
     });
 }); };
