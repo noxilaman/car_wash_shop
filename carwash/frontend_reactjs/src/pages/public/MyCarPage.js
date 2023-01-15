@@ -1,7 +1,7 @@
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Header from "../../layouts/Header";
+import PublicHeader from "../../layouts/PublicHeader";
 import Footer from "../../layouts/Footer";
 import moment from "moment";
 import { useState, useEffect } from "react";
@@ -55,7 +55,7 @@ let text = d.toLocaleString();
 
   return (
     <div>
-      <Header />
+      <PublicHeader />
       {!showLoading && (
         <Container fluid>
           <Row>

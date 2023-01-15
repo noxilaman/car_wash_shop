@@ -51,6 +51,11 @@ function ActivitiesJobspage() {
   const endUpdateStatusHandler = () => {
     postdata("End");
   };
+
+  const paidUpdateStatusHandler = () => {
+    postdata("Paid");
+  };
+
   const postdata = async (status) => {
     const postData = {
       id: id,
@@ -85,7 +90,7 @@ function ActivitiesJobspage() {
       <Header />
       {!showLoading && (
         <Container fluid>
-          <Row>
+          <Row className="m-2 p-2">
             <Col className="text-center">
               <h1>
                 {washData[0].licensecode} {washData[0].licensecity} (
@@ -95,17 +100,16 @@ function ActivitiesJobspage() {
           </Row>
           <Row>
             <Col className="text-center">
-              รับรถวันเวลา:
-              {moment(washData[0].createdate).format("YYYY-MM-DD hh:mm")}
+              รับรถวันเวลา: {moment(washData[0].createdate).format("YYYY-MM-DD hh:mm")}
             </Col>
             <Col className="text-center">สถานะ: {washData[0].washstatus}</Col>
           </Row>
           <Row>
-            <Col className="text-center">{washData[0].washtype}</Col>
+            <Col className="text-center">งาน: {washData[0].washtype}</Col>
             <Col className="text-center">ราคา: {washData[0].price}</Col>
           </Row>
 
-          <Row>
+          <Row className="p-2">
             <Col className="text-center">
               <button
                 className="btn btn-primary btn-lg"
@@ -127,15 +131,33 @@ function ActivitiesJobspage() {
                 className="btn btn-primary btn-lg"
                 onClick={waxUpdateStatusHandler}
               >
-                เครือบสี
+                เคลือบสี
+              </button>
+            </Col> 
+          </Row>
+          <Row className="p-2">
+          <Col className="text-center">
+              <button
+                className="btn btn-primary btn-lg"
+                onClick={waxUpdateStatusHandler}
+              >
+                ขัดสี
               </button>
             </Col> 
             <Col className="text-center">
               <button
-                className="btn btn-primary btn-lg"
+                className="btn btn-secondary btn-lg"
                 onClick={endUpdateStatusHandler}
               >
                 จบงาน
+              </button>
+            </Col>
+            <Col className="text-center">
+              <button
+                className="btn btn-success btn-lg"
+                onClick={paidUpdateStatusHandler}
+              >
+                รับรถและจ่ายเงิน
               </button>
             </Col>
           </Row>

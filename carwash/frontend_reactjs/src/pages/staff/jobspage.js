@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 
 function Jobspage() {
   const navigate = useNavigate(); 
-  const [WashList, setWashList] = useState([]);
+  const [washList, setWashList] = useState([]);
   const tokenkey = localStorage.getItem("token");
 
   useEffect(() => {
@@ -48,10 +48,8 @@ function Jobspage() {
           },
         })
         .then(function (response) {
-          setWashList(response.data);
-          response.data.map((opt) => {
-            console.log(opt);
-          });
+          setWashList(response.data);      
+
         });
     } catch (err) {
       console.log(err);
@@ -79,7 +77,8 @@ function Jobspage() {
                 </tr>
               </thead>
               <tbody>
-                {WashList.map((opt) => (
+                {washList !== null && (
+                washList.map((opt) => (
                   <tr>
                     <td>{moment(opt.createdate).format("YYYY-MM-DD hh:mm")}</td>
                     <td>
@@ -88,15 +87,14 @@ function Jobspage() {
                     <td>{opt.carsize}</td>
                     <td>{opt.washtype}</td>
                     <td>{opt.washstatus}</td>
-                    <td>{process.env.REACT_APP_WEB_URL }
+                    <td>
                         <a href={
-                          process.env.REACT_APP_WEB_URL +
                           "/staff/activitiesjob/" +
                           opt.id
                         }>
                       <QRCodeCanvas
                         value={
-                          process.env.REACT_APP_WEB_URL +
+                          
                           "/staff/activitiesjob/" +
                           opt.id
                         }
@@ -104,7 +102,8 @@ function Jobspage() {
                       </a>
                     </td>
                   </tr>
-                ))}
+                ))
+              )}
               </tbody>
             </Table>
           </Col>

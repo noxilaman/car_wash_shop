@@ -9,8 +9,7 @@ function Footer() {
         style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
       >
         &copy; {new Date().getFullYear()} Copyright:{" "}
-        <a className="text-dark" href="https://mdbootstrap.com/">
-          MDBootstrap.com
+        <a className="text-dark" href="#">NoXil
         </a>
       </div>
     </MDBFooter>

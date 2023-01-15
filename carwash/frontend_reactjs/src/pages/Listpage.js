@@ -102,13 +102,13 @@ function Listpage() {
               <tbody>
                 {WashList.map((opt) => (
                   <tr>
-                    <td>{moment(opt[0].createdate).format("YYYY-MM-DD hh:mm")}</td>
+                    <td>{moment(opt.createdate).format("YYYY-MM-DD hh:mm")}</td>
                     <td>
-                      {opt[0].licensecode} - {opt[0].licensecity}
+                      {opt.licensecode} - {opt.licensecity}
                     </td>
-                    <td>{opt[0].carsize}</td>
-                    <td>{opt[0].washtype}</td>
-                    <td>{opt[0].washstatus}</td>
+                    <td>{opt.carsize}</td>
+                    <td>{opt.washtype}</td>
+                    <td>{opt.washstatus}</td>
                   </tr>
                 ))}
               </tbody>

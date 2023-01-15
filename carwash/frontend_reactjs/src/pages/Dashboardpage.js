@@ -16,7 +16,7 @@ function Dashboardpage() {
         </Row>
         <Row>
           <Col>ส่วนบริการลูกค้า</Col>
-          <Col>ส่วนจัดการหลังบ้าย</Col>
+          <Col>ส่วนจัดการหลังบ้าน</Col>
         </Row>
       </Container>
       <Footer />
