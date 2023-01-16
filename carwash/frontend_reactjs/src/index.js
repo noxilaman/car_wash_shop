@@ -11,7 +11,7 @@ import Washpage from './pages/Washpage';
 import Dashboardpage from './pages/Dashboardpage';
 import Listpage from './pages/Listpage';
 import Jobspage from './pages/staff/jobspage';
-import Loginpage from './pages/auth/loginpage'
+import Loginpage from './pages/auth/loginpage';
 //User
 import CreateUserPage from "./pages/admin/users/CreateUserPage";
 import EditUserPage from "./pages/admin/users/EditUserPage";
@@ -37,6 +37,8 @@ import ListPricePage from "./pages/admin/prices/ListPricePage";
 import MyCarPage from "./pages/public/MyCarPage";
 
 import ActivitiesJobspage from "./pages/staff/activitiesjobpage";
+import Cashspage from './pages/staff/cashspage';
+import ActivitiesCashspage from './pages/staff/activitiescashpage';
 
 export default function App() {
   return (
@@ -47,6 +49,7 @@ export default function App() {
         <Route path="/dashboardpage" element={<Dashboardpage />}></Route>
         <Route path="/listpage" element={<Listpage />}></Route>
         <Route path="/staff/jobspage" element={<Jobspage />}></Route>
+        <Route path="/cashier/jobspage" element={<Cashspage />}></Route>
         <Route path="/login" element={<Loginpage />}></Route>
 
         <Route path="/admin/user/create" element={<CreateUserPage />}></Route>
@@ -101,6 +104,11 @@ export default function App() {
         <Route
           path="/staff/activitiesjob/:id"
           element={<ActivitiesJobspage />}
+        ></Route>
+
+<Route
+          path="/staff/activitiescashier/:id"
+          element={<ActivitiesCashspage/>}
         ></Route>
 
         <Route

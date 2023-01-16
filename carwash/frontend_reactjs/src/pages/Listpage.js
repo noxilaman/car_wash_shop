@@ -19,7 +19,7 @@ function Listpage() {
       (async () => {
         try {
           const res = await axios
-            .get("http://localhost:8086/api/activities/listByShop", {
+            .get("http://localhost:8086/api/activities/listByOperation", {
               headers: {
                 "x-access-token": tokenkey,
               },
@@ -43,7 +43,7 @@ function Listpage() {
   setInterval(async () => {
     try {
       const res = await axios
-        .get("http://localhost:8086/api/activities/listByShop", {
+        .get("http://localhost:8086/api/activities/listByOperation", {
           headers: {
             "x-access-token": tokenkey,
           },

@@ -3,15 +3,15 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Table from "react-bootstrap/Table";
-import Header from "../layouts/Header";
-import Footer from "../layouts/Footer";
+import Header from "../../layouts/Header";
+import Footer from "../../layouts/Footer";
 import moment from "moment";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { QRCodeCanvas } from "qrcode.react";
 import { useNavigate } from "react-router-dom";
 
-function Dashboardpage() {
+function Cashspage() {
   const navigate = useNavigate(); 
   const [washList, setWashList] = useState([]);
   const tokenkey = localStorage.getItem("token");
@@ -20,7 +20,7 @@ function Dashboardpage() {
     (async () => {
       try {
         const res = await axios
-          .get("http://localhost:8086/api/activities/list", {
+          .get("http://localhost:8086/api/activities/listByCashier", {
             headers: {
               "x-access-token": tokenkey,
             },
@@ -42,7 +42,7 @@ function Dashboardpage() {
   setInterval(async () => {
     try {
       const res = await axios
-        .get("http://localhost:8086/api/activities/list", {
+        .get("http://localhost:8086/api/activities/listByCashier", {
           headers: {
             "x-access-token": tokenkey,
           },
@@ -74,7 +74,6 @@ function Dashboardpage() {
                   <th>ขนาดรถ</th>
                   <th>ประเภท</th>
                   <th>สถานะ</th>
-                  <th>QR CODE link สถานะ</th>
                 </tr>
               </thead>
               <tbody>
@@ -86,17 +85,17 @@ function Dashboardpage() {
                       {opt.licensecode} - {opt.licensecity}
                     </td>
                     <td>{opt.carsize}</td>
-                    <td>{opt.washtype}</td>
+                    <td>{opt.washtype}<br/>{opt.washprice}</td>
                     <td>{opt.washstatus}</td>
                     <td>
                         <a href={
-                          "/mycar/view/" +
+                          "/staff/activitiescashier/" +
                           opt.id
                         }>
                       <QRCodeCanvas
                         value={
                           
-                          "/mycar/view/" +
+                          "/staff/activitiescashier/" +
                           opt.id
                         }
                       />
@@ -115,4 +114,4 @@ function Dashboardpage() {
   );
 }
 
-export default Dashboardpage;
+export default Cashspage;

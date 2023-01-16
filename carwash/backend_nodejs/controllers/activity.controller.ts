@@ -175,6 +175,34 @@ exports.listByShop = async (req: any, res: any) => {
   }
 };
 
+exports.listByOperation = async (req: any, res: any) => {
+
+  const [data, metadata] = await Activity.seq.query(
+    "SELECT activities.id AS id ,activities.createdAt AS createdate,cars.license_code AS licensecode, cars.city AS licensecity,car_sizes.name AS carsize,wash_types.name AS washtype,activities.price AS price,activities.`status` AS washstatus FROM activities LEFT JOIN cars ON cars.id = activities.car_id LEFT JOIN car_sizes ON car_sizes.id = cars.car_size_id LEFT JOIN wash_types ON wash_types.id = activities.wash_type_id WHERE activities.status not in ('Paid','Reject')  ORDER BY activities.createdAt desc limit 10;"
+  );
+  if (data) {
+    res.send(data);
+  } else {
+    res.status(404).send({
+      message: `Cannot find Activity.`,
+    });
+  }
+};
+
+exports.listByCashier = async (req: any, res: any) => {
+
+  const [data, metadata] = await Activity.seq.query(
+    "SELECT activities.id AS id ,activities.createdAt AS createdate,cars.license_code AS licensecode, cars.city AS licensecity,car_sizes.name AS carsize,wash_types.name AS washtype,activities.price AS price,activities.`status` AS washstatus, activities.price as washprice  FROM activities LEFT JOIN cars ON cars.id = activities.car_id LEFT JOIN car_sizes ON car_sizes.id = cars.car_size_id LEFT JOIN wash_types ON wash_types.id = activities.wash_type_id WHERE activities.status in ('End')  ORDER BY activities.createdAt desc limit 10;"
+  );
+  if (data) {
+    res.send(data);
+  } else {
+    res.status(404).send({
+      message: `Cannot find Activity.`,
+    });
+  }
+};
+
 // Create and Save a new Tutorial
 exports.fncreate = async (car_id: number, wash_type_id: number, price: number) => {
   // Validate request

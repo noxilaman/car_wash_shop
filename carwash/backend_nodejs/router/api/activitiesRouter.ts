@@ -11,4 +11,10 @@ router.post("/updatestatus", activities.updateStatus);
 
 router.get("/listByShop", activities.listByShop);
 
+router.get("/listByOperation", activities.listByOperation);
+
+router.get("/listByCashier", activities.listByCashier);
+
+
+
 module.exports = router;
