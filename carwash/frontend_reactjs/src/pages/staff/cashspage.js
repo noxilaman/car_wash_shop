@@ -29,12 +29,18 @@ function Cashspage() {
             if(response.status == 200){
               setWashList(response.data);
             }else{
+
+          localStorage.setItem("token", "");
+          localStorage.setItem("groupname", "");
               navigate("/login");
             }
           });
       } catch (err) {
+        
         console.log(err);
-        navigate("/login");
+          localStorage.setItem("token", "");
+          localStorage.setItem("groupname", "");
+          navigate("/login");
       }
     })();
   }, []);
@@ -48,11 +54,22 @@ function Cashspage() {
           },
         })
         .then(function (response) {
-          setWashList(response.data);      
+          if(response.status == 200){
+            setWashList(response.data);
+          }else{
+
+        localStorage.setItem("token", "");
+        localStorage.setItem("groupname", "");
+            navigate("/login");
+          }    
 
         });
     } catch (err) {
       console.log(err);
+
+      localStorage.setItem("token", "");
+      localStorage.setItem("groupname", "");
+          navigate("/login");
     }
   }, 50000);
   return (

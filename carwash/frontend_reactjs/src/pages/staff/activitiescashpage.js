@@ -15,6 +15,7 @@ function ActivitiesCashspage() {
     const { id } = useParams();
   const [washData, setWashData] = useState([]);
   const [showLoading, setShowLoading] = useState(true);
+  const [note, setNote] = useState("");
   
   const tokenkey = localStorage.getItem("token");
 
@@ -33,32 +34,38 @@ function ActivitiesCashspage() {
           });
       } catch (err) {
         console.log(err);
+          localStorage.setItem("token", "");
+          localStorage.setItem("groupname", "");
+          navigate("/login");
       }
     })();
   }, []);
 
-  const washUpdateStatusHandler = () => {
-    postdata('Washing');
+  const paidCashStatusHandler = () => {
+    postdata('Paid','Cash');
   };
 
-  const cleanUpdateStatusHandler = () => {
-    postdata("Cleaning");
+  const paidCardStatusHandler = () => {
+    postdata("Paid",'Card');
   };
 
-  const waxUpdateStatusHandler = () => {
-    postdata("waxing");
+  const paidTransferStatusHandler = () => {
+    postdata("Paid","Transfer");
   };
 
-  const endUpdateStatusHandler = () => {
-    postdata("End");
+  const paidCouponStatusHandler = () => {
+    postdata("Paid",'Coupon');
   };
 
-  const paidUpdateStatusHandler = () => {
-    postdata("Paid");
+  const paidOtherStatusHandler = () => {
+    if(note != ""){
+      postdata("Paid",note);
+    }
+    
   };
 
-  const formNoteHandler = () => {
-
+  const formNoteHandler = event => {
+    setNote(event.target.value);
   };
 
   const postdata = async (status,note) => {
@@ -83,7 +90,7 @@ function ActivitiesCashspage() {
 
       // console.log(res.status);
       if (res.status == 200) {
-        navigate("/staff/jobspage");
+        navigate("/cashier/jobspage");
       }
     } catch (err) {
       console.log(err);
@@ -120,7 +127,7 @@ function ActivitiesCashspage() {
             <Col className="text-center">
               <button
                 className="btn btn-primary btn-lg"
-                onClick={washUpdateStatusHandler}
+                onClick={paidCashStatusHandler}
               >
                 จ่ายเงินสด
               </button>
@@ -128,7 +135,7 @@ function ActivitiesCashspage() {
             <Col className="text-center">
               <button
                 className="btn btn-primary btn-lg"
-                onClick={cleanUpdateStatusHandler}
+                onClick={paidCardStatusHandler}
               >
                 จ่ายบัตร
               </button>
@@ -136,7 +143,7 @@ function ActivitiesCashspage() {
             <Col className="text-center">
               <button
                 className="btn btn-primary btn-lg"
-                onClick={waxUpdateStatusHandler}
+                onClick={paidTransferStatusHandler}
               >
                 โอนจ่าย
               </button>
@@ -146,7 +153,7 @@ function ActivitiesCashspage() {
           <Col className="text-center">
               <button
                 className="btn btn-secondary btn-lg"
-                onClick={waxUpdateStatusHandler}
+                onClick={paidCouponStatusHandler}
               >
                 ใช้คูปองส่วนลด
               </button>
@@ -154,7 +161,7 @@ function ActivitiesCashspage() {
             <Col className="text-center">
               <button
                 className="btn btn-secondary btn-lg"
-                onClick={endUpdateStatusHandler}
+                onClick={paidOtherStatusHandler}
               >
                 อื่นๆ
               </button>

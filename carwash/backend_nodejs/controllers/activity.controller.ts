@@ -269,7 +269,7 @@ exports.updateStatus = async (req: any, res: any) => {
 
         res.status(200).send('done');
 
-    } catch (error) {
+    } catch (error: any) {
         res.status(404).send({message: error.message });
     }
   

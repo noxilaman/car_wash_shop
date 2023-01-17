@@ -4,7 +4,7 @@ const carsizes = require("../../controllers/car_size.controller");
 const washtypes = require("../../controllers/wash_type.controller");
 const prices = require("../../controllers/price.controller");
 const users = require("../../controllers/user.controller");
-const shops = require("../../controllers/shop.controller");
+const groups = require("../../controllers/group.controller");
 var router = express.Router();
 
   router.get("/", (req: any, res: any) => {
@@ -35,6 +35,24 @@ var router = express.Router();
     ["ล้างสี + ดูดฝุ่น + ขัดเครือบ", "L", "250"],
     ["ล้างสี + ดูดฝุ่น + ขัดเครือบ", "XL", "300"],
   ];
+
+  var grouplists = [
+    ["Admin","Admin"],
+    ["Reception","Reception"],
+    ["Washman","Washman"],
+    ["Cashier","Cashier"],
+  ];
+
+  const promise0 = new Promise((resolve, reject) => {
+    grouplists.map(async (opt: any) => {
+      try {
+        const result = await groups.fncreate(opt, opt);
+        resolve(result);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  });
 
   const promise1 = new Promise((resolve, reject) => {
     sizecarbase.map(async (opt: any) => {
@@ -82,17 +100,6 @@ var router = express.Router();
 
 router.get("/usersetup", async (req: any, res: any) => {
   try {
-    const promise1 = new Promise(async (resolve, reject) => {
-
-      const result = await shops.fncreate(
-        "demo",
-        "/uploads/logo/demo.png",
-        "000000000",
-        "noxil",
-        "-"
-      );
-      resolve(result);
-    });
     const promise2 = new Promise(async (resolve, reject) => {
       
       const result = await users.fncreate(
@@ -105,7 +112,7 @@ router.get("/usersetup", async (req: any, res: any) => {
       resolve(result);
     }); 
 
-    Promise.all([promise1,promise2])
+    Promise.all([promise2])
       .finally(() => {
         res.send("end");
       });

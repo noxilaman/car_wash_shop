@@ -103,7 +103,7 @@ res.send({
           });
         }
       })
-      .catch((err) => {
+      .catch((err: any) => {
         res.status(500);
         res.send({
           message: err.message ||"Error retrieving Car with id=" + id,
@@ -140,7 +140,7 @@ res.send({
           });
         }
       })
-      .catch((err) => {
+      .catch((err: any) => {
         res.status(500);
         res.send({
           message: err.message ||"Error retrieving Car with id=" + id,

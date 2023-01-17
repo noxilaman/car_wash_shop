@@ -81,6 +81,9 @@ function ActivitiesJobspage() {
       }
     } catch (err) {
       console.log(err);
+      localStorage.setItem("token", "");
+      localStorage.setItem("groupname", "");
+      navigate("/login");
     }
   };
 
@@ -153,12 +156,6 @@ function ActivitiesJobspage() {
               </button>
             </Col>
             <Col className="text-center">
-              <button
-                className="btn btn-success btn-lg"
-                onClick={paidUpdateStatusHandler}
-              >
-                รับรถและจ่ายเงิน
-              </button>
             </Col>
           </Row>
         </Container>

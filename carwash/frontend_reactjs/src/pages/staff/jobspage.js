@@ -1,4 +1,3 @@
-
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -12,7 +11,7 @@ import { QRCodeCanvas } from "qrcode.react";
 import { useNavigate } from "react-router-dom";
 
 function Jobspage() {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const [washList, setWashList] = useState([]);
   const tokenkey = localStorage.getItem("token");
 
@@ -20,20 +19,25 @@ function Jobspage() {
     (async () => {
       try {
         const res = await axios
-          .get("http://localhost:8086/api/activities/list", {
+          .get("http://localhost:8086/api/activities/listByOperation", {
             headers: {
               "x-access-token": tokenkey,
             },
           })
           .then(function (response) {
-            if(response.status == 200){
+            if (response.status == 200) {
               setWashList(response.data);
-            }else{
+            } else {
+              localStorage.setItem("token", "");
+              localStorage.setItem("groupname", "");
               navigate("/login");
             }
           });
       } catch (err) {
         console.log(err);
+
+        localStorage.setItem("token", "");
+        localStorage.setItem("groupname", "");
         navigate("/login");
       }
     })();
@@ -42,17 +46,26 @@ function Jobspage() {
   setInterval(async () => {
     try {
       const res = await axios
-        .get("http://localhost:8086/api/activities/list", {
+        .get("http://localhost:8086/api/activities/listByOperation", {
           headers: {
             "x-access-token": tokenkey,
           },
         })
         .then(function (response) {
-          setWashList(response.data);      
-
+          if (response.status == 200) {
+            setWashList(response.data);
+          } else {
+            localStorage.setItem("token", "");
+            localStorage.setItem("groupname", "");
+            navigate("/login");
+          }
         });
     } catch (err) {
       console.log(err);
+
+      localStorage.setItem("token", "");
+      localStorage.setItem("groupname", "");
+      navigate("/login");
     }
   }, 50000);
   return (
@@ -77,33 +90,27 @@ function Jobspage() {
                 </tr>
               </thead>
               <tbody>
-                {washList !== null && (
-                washList.map((opt) => (
-                  <tr>
-                    <td>{moment(opt.createdate).format("YYYY-MM-DD hh:mm")}</td>
-                    <td>
-                      {opt.licensecode} - {opt.licensecity}
-                    </td>
-                    <td>{opt.carsize}</td>
-                    <td>{opt.washtype}</td>
-                    <td>{opt.washstatus}</td>
-                    <td>
-                        <a href={
-                          "/staff/activitiesjob/" +
-                          opt.id
-                        }>
-                      <QRCodeCanvas
-                        value={
-                          
-                          "/staff/activitiesjob/" +
-                          opt.id
-                        }
-                      />
-                      </a>
-                    </td>
-                  </tr>
-                ))
-              )}
+                {washList !== null &&
+                  washList.map((opt) => (
+                    <tr>
+                      <td>
+                        {moment(opt.createdate).format("YYYY-MM-DD hh:mm")}
+                      </td>
+                      <td>
+                        {opt.licensecode} - {opt.licensecity}
+                      </td>
+                      <td>{opt.carsize}</td>
+                      <td>{opt.washtype}</td>
+                      <td>{opt.washstatus}</td>
+                      <td>
+                        <a href={"/staff/activitiesjob/" + opt.id}>
+                          <QRCodeCanvas
+                            value={"/staff/activitiesjob/" + opt.id}
+                          />
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </Table>
           </Col>

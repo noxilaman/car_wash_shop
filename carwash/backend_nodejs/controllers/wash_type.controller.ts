@@ -1,3 +1,4 @@
+export {};
 const db = require("../models");
 const WashType = db.wash_types;
 const Op = db.Sequelize.Op;
