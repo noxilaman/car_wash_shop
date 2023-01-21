@@ -15,6 +15,9 @@ module.exports = (sequelize: any, Sequelize: any) => {
     price: {
       type: Sequelize.FLOAT,
     },
+    photo: {
+      type: Sequelize.STRING,
+    },
   });
 
   Activity.seq = sequelize;

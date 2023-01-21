@@ -179,7 +179,7 @@ exports.list = function (req, res) { return __awaiter(void 0, void 0, void 0, fu
     var _a, data, metadata;
     return __generator(this, function (_b) {
         switch (_b.label) {
-            case 0: return [4 /*yield*/, Activity.seq.query("SELECT activities.id AS id ,activities.createdAt AS createdate,cars.license_code AS licensecode, cars.city AS licensecity,car_sizes.name AS carsize,wash_types.name AS washtype,activities.price AS price,activities.`status` AS washstatus FROM activities LEFT JOIN cars ON cars.id = activities.car_id LEFT JOIN car_sizes ON car_sizes.id = cars.car_size_id LEFT JOIN wash_types ON wash_types.id = activities.wash_type_id ORDER BY activities.createdAt desc limit 10;")];
+            case 0: return [4 /*yield*/, Activity.seq.query("SELECT activities.id AS id ,activities.createdAt AS createdate,cars.license_code AS licensecode, cars.city AS licensecity,car_sizes.name AS carsize,wash_types.name AS washtype,activities.price AS price,activities.`status` AS washstatus, activities.photo AS photo FROM activities LEFT JOIN cars ON cars.id = activities.car_id LEFT JOIN car_sizes ON car_sizes.id = cars.car_size_id LEFT JOIN wash_types ON wash_types.id = activities.wash_type_id ORDER BY activities.createdAt desc limit 10;")];
             case 1:
                 _a = _b.sent(), data = _a[0], metadata = _a[1];
                 if (data) {
@@ -252,7 +252,7 @@ exports.listByCashier = function (req, res) { return __awaiter(void 0, void 0, v
     });
 }); };
 // Create and Save a new Tutorial
-exports.fncreate = function (car_id, wash_type_id, price) { return __awaiter(void 0, void 0, void 0, function () {
+exports.fncreate = function (car_id, wash_type_id, price, photo) { return __awaiter(void 0, void 0, void 0, function () {
     var activity, result;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -272,7 +272,8 @@ exports.fncreate = function (car_id, wash_type_id, price) { return __awaiter(voi
                     wash_type_id: wash_type_id,
                     status: "Pending",
                     note: "",
-                    price: price
+                    price: price,
+                    photo: photo
                 };
                 return [4 /*yield*/, Activity.create(activity)];
             case 1:

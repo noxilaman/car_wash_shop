@@ -71,6 +71,7 @@ function Dashboardpage() {
                 <tr>
                   <th>วันเวลา</th>
                   <th>ทะเบียนรถ</th>
+                  <th>Photo</th>
                   <th>ขนาดรถ</th>
                   <th>ประเภท</th>
                   <th>สถานะ</th>
@@ -84,6 +85,13 @@ function Dashboardpage() {
                     <td>{moment(opt.createdate).format("YYYY-MM-DD hh:mm")}</td>
                     <td>
                       {opt.licensecode} - {opt.licensecity}
+                    </td>
+                    <td>
+                      {opt.photo !== "" && opt.photo !== null && (
+                        <div>
+                          <img src={opt.photo} className="img-thumbnail"></img>
+                        </div>
+                      )}
                     </td>
                     <td>{opt.carsize}</td>
                     <td>{opt.washtype}</td>

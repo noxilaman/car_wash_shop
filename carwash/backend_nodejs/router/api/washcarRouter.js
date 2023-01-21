@@ -48,11 +48,6 @@ router.post("/create", function (req, res) {
                 case 0:
                     _a.trys.push([0, 7, , 8]);
                     postData = req.body;
-                    //console.log(req.files);
-                    if (req.files) {
-                        File_1 = req.files.File;
-                        File_1.mv(__dirname + "/../../../frontend_reactjs/public/uploads/" + File_1.name);
-                    }
                     //validate Empty data
                     if (!(postData.licensename &&
                         postData.city &&
@@ -60,6 +55,13 @@ router.post("/create", function (req, res) {
                         postData.washTypeId &&
                         postData.price)) {
                         res.status(400).send("All Input is required");
+                    }
+                    postData.photo = "";
+                    //console.log(req.files);
+                    if (req.files) {
+                        File_1 = req.files.File;
+                        File_1.mv(__dirname + "/../../../frontend_reactjs/public/uploads/" + File_1.name);
+                        postData.photo = "/uploads/" + File_1.name;
                     }
                     return [4 /*yield*/, cars.haveCar(postData.licensename, postData.city)];
                 case 1:
@@ -77,7 +79,7 @@ router.post("/create", function (req, res) {
                     _a.label = 4;
                 case 4:
                     if (!carid) return [3 /*break*/, 6];
-                    return [4 /*yield*/, activities.fncreate(carid, postData.washTypeId, postData.price)];
+                    return [4 /*yield*/, activities.fncreate(carid, postData.washTypeId, postData.price, postData.photo)];
                 case 5:
                     Result = _a.sent();
                     res.status(200).send(Result);

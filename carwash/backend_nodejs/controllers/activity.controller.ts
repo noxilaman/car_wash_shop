@@ -150,7 +150,7 @@ exports.deleteAll = (req: any, res: any) => {
 
 exports.list = async (req: any, res: any) =>{
    const [data, metadata]  = await Activity.seq.query(
-     "SELECT activities.id AS id ,activities.createdAt AS createdate,cars.license_code AS licensecode, cars.city AS licensecity,car_sizes.name AS carsize,wash_types.name AS washtype,activities.price AS price,activities.`status` AS washstatus FROM activities LEFT JOIN cars ON cars.id = activities.car_id LEFT JOIN car_sizes ON car_sizes.id = cars.car_size_id LEFT JOIN wash_types ON wash_types.id = activities.wash_type_id ORDER BY activities.createdAt desc limit 10;"
+     "SELECT activities.id AS id ,activities.createdAt AS createdate,cars.license_code AS licensecode, cars.city AS licensecity,car_sizes.name AS carsize,wash_types.name AS washtype,activities.price AS price,activities.`status` AS washstatus, activities.photo AS photo FROM activities LEFT JOIN cars ON cars.id = activities.car_id LEFT JOIN car_sizes ON car_sizes.id = cars.car_size_id LEFT JOIN wash_types ON wash_types.id = activities.wash_type_id ORDER BY activities.createdAt desc limit 10;"
    );
       if (data) {
         res.send(data);
@@ -204,7 +204,7 @@ exports.listByCashier = async (req: any, res: any) => {
 };
 
 // Create and Save a new Tutorial
-exports.fncreate = async (car_id: number, wash_type_id: number, price: number) => {
+exports.fncreate = async (car_id: number, wash_type_id: number, price: number, photo: string) => {
   // Validate request
   if (!car_id) {
     return;
@@ -225,6 +225,7 @@ exports.fncreate = async (car_id: number, wash_type_id: number, price: number) =
     status: "Pending",
     note: "",
     price: price,
+    photo: photo
   };
 
   // Save Tutorial in the database

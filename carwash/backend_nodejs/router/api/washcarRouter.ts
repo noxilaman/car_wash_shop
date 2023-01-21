@@ -8,14 +8,6 @@ router.post("/create", async function (req : any, res: any) {
   try {
     const postData = req.body;
 
-    //console.log(req.files);
-    if (req.files) {
-      const { File } = req.files;
-
-      File.mv(
-        __dirname + "/../../../frontend_reactjs/public/uploads/" + File.name
-      );
-    }
 
     //validate Empty data
     if (
@@ -28,6 +20,16 @@ router.post("/create", async function (req : any, res: any) {
       )
     ) {
       res.status(400).send("All Input is required");
+    }
+    postData.photo = "";
+    //console.log(req.files);
+    if (req.files) {
+      const { File } = req.files;
+
+      File.mv(
+        __dirname + "/../../../frontend_reactjs/public/uploads/" + File.name
+      );
+      postData.photo = "/uploads/" + File.name;
     }
 
     const gResult = await cars.haveCar(postData.licensename, postData.city);
@@ -51,7 +53,8 @@ router.post("/create", async function (req : any, res: any) {
       const Result = await activities.fncreate(
         carid,
         postData.washTypeId,
-        postData.price
+        postData.price,
+        postData.photo
       );
       res.status(200).send(Result);
     }
