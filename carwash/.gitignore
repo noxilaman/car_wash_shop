@@ -10,6 +10,7 @@
 
 # production
 /frontend_reactjs/build
+/frontend_reactjs/public/uploads
 
 # misc
 /frontend_reactjs/.DS_Store

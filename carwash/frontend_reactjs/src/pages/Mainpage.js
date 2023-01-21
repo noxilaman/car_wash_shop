@@ -8,6 +8,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Mainpage() {
+  const SERVER_URL = process.env.REACT_APP_WEB_URL;
 
   const navigate = useNavigate(); 
 
@@ -22,7 +23,7 @@ function Mainpage() {
     (async () => {
       try {
         const chk = await axios
-          .get("http://localhost:8086/api/checkauth", {
+          .get(SERVER_URL + "/api/checkauth", {
             headers: {
               "x-access-token": tokenkey,
             },

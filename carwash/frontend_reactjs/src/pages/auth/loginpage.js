@@ -11,7 +11,9 @@ import { useNavigate } from "react-router-dom";
 
 function Loginpage() {
 
-  console.log('run login');
+  const SERVER_URL = process.env.REACT_APP_WEB_URL;
+
+  console.log(SERVER_URL);
 
   const navigate = useNavigate(); 
   const [email,setEmail] = useState('');
@@ -44,7 +46,7 @@ function Loginpage() {
 
     try {
       const res = await axios.post(
-        "http://localhost:8086/api/user/login",
+        SERVER_URL + "/api/user/login",
         postData,
         {
           headers: {
@@ -60,7 +62,7 @@ function Loginpage() {
         localStorage.setItem("user", JSON.stringify(res.data));
 
         const res2 = await axios
-          .get("http://localhost:8086/api/group/" + res.data.group_id, {
+          .get(SERVER_URL + "/api/group/" + res.data.group_id, {
             headers: {
               "x-access-token": res.data.token,
             },

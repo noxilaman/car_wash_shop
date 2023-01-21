@@ -12,6 +12,7 @@ import { QRCodeCanvas } from "qrcode.react";
 import { useNavigate } from "react-router-dom";
 
 function Dashboardpage() {
+  const SERVER_URL = process.env.REACT_APP_WEB_URL;
   const navigate = useNavigate(); 
   const [washList, setWashList] = useState([]);
   const tokenkey = localStorage.getItem("token");
@@ -20,7 +21,7 @@ function Dashboardpage() {
     (async () => {
       try {
         const res = await axios
-          .get("http://localhost:8086/api/activities/list", {
+          .get(SERVER_URL + "/api/activities/list", {
             headers: {
               "x-access-token": tokenkey,
             },
@@ -42,7 +43,7 @@ function Dashboardpage() {
   setInterval(async () => {
     try {
       const res = await axios
-        .get("http://localhost:8086/api/activities/list", {
+        .get(SERVER_URL + "/api/activities/list", {
           headers: {
             "x-access-token": tokenkey,
           },

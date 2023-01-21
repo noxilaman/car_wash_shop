@@ -11,6 +11,7 @@ import axios from "axios";
 import { useParams,useNavigate } from "react-router-dom";
 
 function Listpage() {
+  const SERVER_URL = process.env.REACT_APP_WEB_URL;
   const navigate = useNavigate();
   const [WashList, setWashList] = useState([]);
 
@@ -19,7 +20,7 @@ function Listpage() {
       (async () => {
         try {
           const res = await axios
-            .get("http://localhost:8086/api/activities/listByOperation", {
+            .get(SERVER_URL + "/api/activities/listByOperation", {
               headers: {
                 "x-access-token": tokenkey,
               },
@@ -43,7 +44,7 @@ function Listpage() {
   setInterval(async () => {
     try {
       const res = await axios
-        .get("http://localhost:8086/api/activities/listByOperation", {
+        .get(SERVER_URL + "/api/activities/listByOperation", {
           headers: {
             "x-access-token": tokenkey,
           },

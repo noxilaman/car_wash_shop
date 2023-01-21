@@ -12,6 +12,7 @@ import { QRCodeCanvas } from "qrcode.react";
 import { useNavigate } from "react-router-dom";
 
 function Cashspage() {
+  const SERVER_URL = process.env.REACT_APP_WEB_URL;
   const navigate = useNavigate(); 
   const [washList, setWashList] = useState([]);
   const tokenkey = localStorage.getItem("token");
@@ -20,7 +21,7 @@ function Cashspage() {
     (async () => {
       try {
         const res = await axios
-          .get("http://localhost:8086/api/activities/listByCashier", {
+          .get(SERVER_URL + "/api/activities/listByCashier", {
             headers: {
               "x-access-token": tokenkey,
             },
@@ -48,7 +49,7 @@ function Cashspage() {
   setInterval(async () => {
     try {
       const res = await axios
-        .get("http://localhost:8086/api/activities/listByCashier", {
+        .get(SERVER_URL + "/api/activities/listByCashier", {
           headers: {
             "x-access-token": tokenkey,
           },

@@ -10,6 +10,7 @@ import { QRCodeCanvas } from "qrcode.react";
 import { useParams, useNavigate } from "react-router-dom";
 
 function ActivitiesJobspage() {
+  const SERVER_URL = process.env.REACT_APP_WEB_URL;
   const navigate = useNavigate(); 
     const { id } = useParams();
   const [washData, setWashData] = useState([]);
@@ -21,7 +22,7 @@ function ActivitiesJobspage() {
     (async () => {
       try {
         const res = await axios
-          .get("http://localhost:8086/api/activities/get/" + id, {
+          .get(SERVER_URL + "/api/activities/get/" + id, {
             headers: {
               "x-access-token": tokenkey,
             },
@@ -66,7 +67,7 @@ function ActivitiesJobspage() {
 
     try {
       const res = await axios.post(
-        "http://localhost:8086/api/activities/updatestatus",
+        SERVER_URL + "/api/activities/updatestatus",
         postData,
         {
           headers: {

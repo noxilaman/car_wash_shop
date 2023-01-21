@@ -10,6 +10,7 @@ import axios from "axios";
 import { useNavigate,useParams } from "react-router-dom";
 
 function Washpage() {
+  const SERVER_URL = process.env.REACT_APP_WEB_URL;
   const navigate = useNavigate(); 
   const [licensename,setLicensename] = useState('');
   const [city,setCity] = useState('');
@@ -31,7 +32,7 @@ function Washpage() {
     (async () => {
     try {
       const chk = await axios
-        .get("http://localhost:8086/api/checkauth", {
+        .get(SERVER_URL + "/api/checkauth", {
           headers: {
             "x-access-token": tokenkey,
           },
@@ -44,7 +45,7 @@ function Washpage() {
         });
 
       const res = await axios
-        .get("http://localhost:8086/api/sizecar/getall", {
+        .get(SERVER_URL + "/api/sizecar/getall", {
           headers: {
             "x-access-token": tokenkey,
           },
@@ -55,7 +56,7 @@ function Washpage() {
         });
 
       const res2 = await axios
-        .get("http://localhost:8086/api/washtype/getall", {
+        .get(SERVER_URL + "/api/washtype/getall", {
           headers: {
             "x-access-token": tokenkey,
           },
@@ -111,7 +112,7 @@ function Washpage() {
       ) {
         const res2 = await axios
           .get(
-            "http://localhost:8086/api/price/getselected/" + wtid + "/" + scid
+            SERVER_URL + "/api/price/getselected/" + wtid + "/" + scid
             , {
               headers: {
                 "x-access-token": tokenkey,
@@ -149,7 +150,7 @@ function Washpage() {
     console.log(formData);
 
     try {
-      const res = await axios.post("http://localhost:8086/api/washcar/create", formData, {
+      const res = await axios.post(SERVER_URL + "/api/washcar/create", formData, {
         headers: {
           "x-access-token": tokenkey,
           "Content-Type": "multipart/form-data",

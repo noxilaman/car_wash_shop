@@ -10,6 +10,7 @@ import { QRCodeCanvas } from "qrcode.react";
 import { useParams, useNavigate } from "react-router-dom";
 
 function MyCarPage() {
+  const SERVER_URL = process.env.REACT_APP_WEB_URL;
   const navigate = useNavigate();
   const { id } = useParams();
   const [washData, setWashData] = useState([]);
@@ -22,7 +23,7 @@ function MyCarPage() {
     (async () => {
       try {
         const res = await axios
-          .get("http://localhost:8086/api/public/activity/get/" + id)
+          .get(SERVER_URL + "/api/public/activity/get/" + id)
           .then(function (response) {
             setWashData(response.data);
             setShowLoading(false);
@@ -40,7 +41,7 @@ function MyCarPage() {
   setInterval(async () => {
     try {
       const res = await axios
-        .get("http://localhost:8086/api/public/activity/get/" + id)
+        .get(SERVER_URL + "/api/public/activity/get/" + id)
         .then(function (response) {
             const d = new Date();
 let text = d.toLocaleString();
@@ -94,6 +95,14 @@ let text = d.toLocaleString();
               <Col className="text-center">Update: {updateDate}</Col>
             </h2>
           </Row>
+          {washData[0].photo !== "" && washData[0].photo !== null && (
+<Row>
+            <div className="text-center">
+              <img src={ washData[0].photo } className="img-thumbnail" />
+            </div>
+          </Row>
+          )}
+          
         </Container>
       )}
       <Footer />

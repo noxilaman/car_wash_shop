@@ -11,6 +11,7 @@ import { QRCodeCanvas } from "qrcode.react";
 import { useNavigate } from "react-router-dom";
 
 function Jobspage() {
+  const SERVER_URL = process.env.REACT_APP_WEB_URL;
   const navigate = useNavigate();
   const [washList, setWashList] = useState([]);
   const tokenkey = localStorage.getItem("token");
@@ -19,7 +20,7 @@ function Jobspage() {
     (async () => {
       try {
         const res = await axios
-          .get("http://localhost:8086/api/activities/listByOperation", {
+          .get(SERVER_URL + "/api/activities/listByOperation", {
             headers: {
               "x-access-token": tokenkey,
             },
@@ -46,7 +47,7 @@ function Jobspage() {
   setInterval(async () => {
     try {
       const res = await axios
-        .get("http://localhost:8086/api/activities/listByOperation", {
+        .get(SERVER_URL + "/api/activities/listByOperation", {
           headers: {
             "x-access-token": tokenkey,
           },
