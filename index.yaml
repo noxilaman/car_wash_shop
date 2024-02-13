@@ -1,0 +1,131 @@
+openapi: 3.0.3
+info:
+  title: Vehicle Status
+  version: 1.0.0
+  description: API to perform critical status checks on connected vehicles
+paths:
+  /vehicles/{vin}/status/odometer:
+    parameters:
+      - $ref: '#/components/parameters/vinParam'          
+    get:
+      summary: Returns the current odometer reading in both km and miles
+      operationId: getOdometerStatus
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  km:
+                    type: number
+                  miles:
+                    type: number
+              examples:
+                Success:
+                  value:
+                    km: 100000
+                    miles: 62000    
+        '500':
+          $ref: '#/components/responses/500UnexpectedError'  
+  /vehicles/{vin}/status/battery:
+    parameters:    
+      - $ref: '#/components/parameters/vinParam' 
+    get:
+      summary: Returns a status and health report for all connected battery elements (includes EV batteries as well)
+      operationId: getBatteryStatus
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cca:
+                    type: number
+                  charging:
+                    type: boolean
+                  health:
+                    type: string
+                  install:
+                    type: string
+                  overvolt:
+                    type: boolean
+                  type:
+                    type: string
+                  voltage:
+                    type: number
+              examples:
+                Success:
+                  value:
+                    cca: 600
+                    charging: true
+                    health: good
+                    install: 2020-02-02
+                    overvolt: false
+                    type: AGM
+                    voltage: 14.2   
+        '500':
+          $ref: '#/components/responses/500UnexpectedError'  
+  /vehicles/{vin}/status/engine:
+    parameters:
+      - $ref: '#/components/parameters/vinParam'    
+    get:
+      summary: Returns a complete status and health update for the engine
+      description: As status checks are core features of the PM connected car experience, this feature is allowed by default in the customer account settings. However, users do have the option to revoke remote status reporting access to APIs and rely only on the car dashboard indicators. Thus, developers should check for a successful response before continuing with any further workflows.  
+      operationId: getEngineStatus
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  coolantTemp:
+                    type: number
+                  oilPressure:
+                    type: number
+                  oilTemp:
+                    type: number
+                  rpm:
+                    type: number
+                  running:
+                    type: boolean
+              examples:
+                Success:
+                  value:
+                    coolantTemp: 92
+                    oilPressure: 4
+                    oilTemp: 80
+                    rpm: 800
+                    running: true  
+        '500':
+          $ref: '#/components/responses/500UnexpectedError'                                                                               
+components:
+  parameters:
+    vinParam:
+      in: path
+      name: vin
+      description: Required 17-character VIN (Vehicle Identification Number)  
+      schema:
+        type: string
+      example: 4Y1SL65848Z411439
+      required: true            
+  responses:
+    500UnexpectedError:
+      description: Unexpected error
+      content:
+        text/plain:
+          schema:
+            type: string
+            example: Unexpected error occured                
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-key 
+security:
+  - ApiKeyAuth: []                              
